@@ -8,5 +8,6 @@ int main()
 
     std::cout << "int main()\n{\n    std::cout << \"Hello, world!\" << std::endl;\n}" << std::endl;
 
+    std::cout << "H\ne\nl\nl\no\n,\n \nw\no\nr\nl\nd\n!\n" << std::endl;
     return 0;
 }
