@@ -1,4 +1,4 @@
-# Working with Strings
+# Working with Strings (more stuff we know)
 
 Use `std::cin >> variable_name` to read user input into a variable.
 
