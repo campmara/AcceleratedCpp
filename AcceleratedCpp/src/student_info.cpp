@@ -3,21 +3,27 @@
 
 using std::istream;
 using std::vector;
+using std::list;
 
-bool CompareStudentInfos(const StudentInfo &x, const StudentInfo &y)
+bool compare_StudentInfo_predicate(const StudentInfo &x, const StudentInfo &y)
 {
     return x.name < y.name; // Alphabetical order
 }
 
-istream &Read(istream &is, StudentInfo &s)
+bool is_f_grade(const StudentInfo &s)
+{
+    return compute_grade(s) < 60.0;
+}
+
+istream &read_StudentInfo(istream &is, StudentInfo &s)
 {
     is >> s.name >> s.midterm >> s.final;
 
-    ReadHomework(is, s.homework);
+    read_homework(is, s.homework);
     return is;
 }
 
-istream &ReadHomework(istream &in, vector<double> &hw)
+istream &read_homework(istream &in, vector<double> &hw)
 {
     if (in)
     {
@@ -35,4 +41,27 @@ istream &ReadHomework(istream &in, vector<double> &hw)
         in.clear();
     }
     return in;
+}
+
+list<StudentInfo> extract_failures(list<StudentInfo> &students)
+{
+    list<StudentInfo> fail;
+    list<StudentInfo>::iterator iter = students.begin();
+
+    while (iter != students.end())
+    {
+        if (is_f_grade((*iter)))
+        {
+            fail.push_back(*iter);
+            iter = students.erase(iter);
+        }
+        else
+        {
+            // we only increment iter if the student passed, because removal above in the fail state
+            // will automatically make i point to the next element in students
+            ++iter;
+        }
+    }
+
+    return fail;
 }

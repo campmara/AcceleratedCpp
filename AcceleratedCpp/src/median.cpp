@@ -13,7 +13,7 @@ using std::vector;
 /// <summary>
 /// Compute the median of a vector of doubles. Note that calling this function copies the vector.
 /// </summary>
-double Median(vector<double> vec)
+double median(vector<double> vec)
 {
     typedef vector<double>::size_type vsize;
     vsize size = vec.size();

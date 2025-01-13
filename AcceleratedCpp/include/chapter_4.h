@@ -46,11 +46,11 @@ int grading_functions_program()
     double x;
     vector<double> homework;
 
-    ReadHomework(cin, homework);
+    read_homework(cin, homework);
 
     try
     {
-        double final_grade = ComputeGrade(midterm, final, homework);
+        double final_grade = compute_grade(midterm, final, homework);
 
         streamsize prec = cout.precision();
         cout << "Your final grade is " << setprecision(3) << final_grade << setprecision(prec)
@@ -71,14 +71,14 @@ int student_info_program()
     string::size_type max_length = 0;
 
     // read and store all the records, and find the length of the longest name
-    while (Read(cin, record))
+    while (read_StudentInfo(cin, record))
     {
         max_length = max(max_length, record.name.size());
         students.push_back(record);
     }
 
     // alphabetize the records
-    sort(students.begin(), students.end(), CompareStudentInfos);
+    sort(students.begin(), students.end(), compare_StudentInfo_predicate);
 
     for (vector<StudentInfo>::size_type i = 0; i != students.size(); ++i)
     {
@@ -88,7 +88,7 @@ int student_info_program()
         // compute and write the grade
         try
         {
-            double final_grade = ComputeGrade(students[i]);
+            double final_grade = compute_grade(students[i]);
             streamsize prec = cout.precision();
             cout << setprecision(3) << final_grade << setprecision(prec);
         }
@@ -236,12 +236,12 @@ istream &read_and_compute(istream &is, StudentInfoRewritten &s)
 
     if (is)
     {
-        ReadHomework(is, homework);
+        read_homework(is, homework);
 
         // compute and write the grade
         try
         {
-            double final_grade = ComputeGrade(midterm, final, homework);
+            double final_grade = compute_grade(midterm, final, homework);
             s.final_grade = final_grade;
         }
         catch (std::domain_error e)

@@ -5,8 +5,8 @@
 
 #include "student_info.h"
 
-double ComputeGrade(double midterm, double final, double homework);
-double ComputeGrade(double midterm, double final, const std::vector<double> &homework);
-double ComputeGrade(const StudentInfo &s);
+double compute_grade(double midterm, double final, double homework);
+double compute_grade(double midterm, double final, const std::vector<double> &homework);
+double compute_grade(const StudentInfo &s);
 
 #endif // !COMPUTE_GRADE_H
